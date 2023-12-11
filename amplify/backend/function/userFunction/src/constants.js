@@ -1,0 +1,4 @@
+exports.params = {
+  JWT_SECRET_KEY: 'JWT_SECRET_KEY',
+  NUM_SALT_ROUND: 'NUM_SALT_ROUND',
+};

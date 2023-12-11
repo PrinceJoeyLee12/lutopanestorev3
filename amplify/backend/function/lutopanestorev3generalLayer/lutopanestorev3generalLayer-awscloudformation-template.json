@@ -1,0 +1,775 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Lambda layer resource stack creation using Amplify CLI",
+  "Parameters": {
+    "env": {
+      "Type": "String"
+    },
+    "deploymentBucketName": {
+      "Type": "String"
+    },
+    "s3Key": {
+      "Type": "String"
+    },
+    "description": {
+      "Type": "String",
+      "Default": ""
+    },
+    "runtimes": {
+      "Type": "List<String>"
+    }
+  },
+  "Resources": {
+    "LambdaLayerVersion377cd43a": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": {
+          "Ref": "runtimes"
+        },
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": {
+            "Ref": "s3Key"
+          }
+        },
+        "Description": {
+          "Ref": "description"
+        },
+        "LayerName": {
+          "Fn::Sub": [
+            "lutopanestorev3generalLayer-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionAwsOrgodtohnzd8cb377cd43a": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": {
+          "Ref": "LambdaLayerVersion377cd43a"
+        },
+        "OrganizationId": "o-dtohnzd8cb",
+        "Principal": "*"
+      }
+    },
+    "LambdaLayerPermissionPrivate377cd43a": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": {
+          "Ref": "LambdaLayerVersion377cd43a"
+        },
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
+      }
+    },
+    "LambdaLayerVersionaeed1f4f": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs18.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/lutopanestorev3generalLayer-LambdaLayerVersionaeed1f4f-build.zip"
+        },
+        "Description": "Updated layer version 2023-11-03T13:25:19.367Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "lutopanestorev3generalLayer-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionAwsOrgodtohnzd8cbaeed1f4f": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:15",
+        "OrganizationId": "o-dtohnzd8cb",
+        "Principal": "*"
+      }
+    },
+    "LambdaLayerPermissionPrivateaeed1f4f": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:15",
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
+      }
+    },
+    "LambdaLayerVersiona6d4a77e": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs18.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/lutopanestorev3generalLayer-LambdaLayerVersiona6d4a77e-build.zip"
+        },
+        "Description": "Updated layer version 2023-10-22T14:42:15.481Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "lutopanestorev3generalLayer-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionAwsOrgodtohnzd8cba6d4a77e": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:14",
+        "OrganizationId": "o-dtohnzd8cb",
+        "Principal": "*"
+      }
+    },
+    "LambdaLayerPermissionPrivatea6d4a77e": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:14",
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
+      }
+    },
+    "LambdaLayerVersion41cde68f": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs18.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/lutopanestorev3generalLayer-LambdaLayerVersion41cde68f-build.zip"
+        },
+        "Description": "Updated layer version 2023-10-15T13:46:05.160Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "lutopanestorev3generalLayer-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionAwsOrgodtohnzd8cb41cde68f": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:13",
+        "OrganizationId": "o-dtohnzd8cb",
+        "Principal": "*"
+      }
+    },
+    "LambdaLayerPermissionPrivate41cde68f": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:13",
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
+      }
+    },
+    "LambdaLayerVersion8c20c209": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs18.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/lutopanestorev3generalLayer-LambdaLayerVersion8c20c209-build.zip"
+        },
+        "Description": "Updated layer version 2023-10-12T05:05:17.122Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "lutopanestorev3generalLayer-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionAwsOrgodtohnzd8cb8c20c209": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:12",
+        "OrganizationId": "o-dtohnzd8cb",
+        "Principal": "*"
+      }
+    },
+    "LambdaLayerPermissionPrivate8c20c209": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:12",
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
+      }
+    },
+    "LambdaLayerVersion4d390465": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs18.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/lutopanestorev3generalLayer-LambdaLayerVersion4d390465-build.zip"
+        },
+        "Description": "Updated layer version 2023-10-12T03:22:36.977Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "lutopanestorev3generalLayer-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionAwsOrgodtohnzd8cb4d390465": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:11",
+        "OrganizationId": "o-dtohnzd8cb",
+        "Principal": "*"
+      }
+    },
+    "LambdaLayerPermissionPrivate4d390465": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:11",
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
+      }
+    },
+    "LambdaLayerVersionbc1d60d4": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs18.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/lutopanestorev3generalLayer-LambdaLayerVersionbc1d60d4-build.zip"
+        },
+        "Description": "Updated layer version 2023-10-11T16:03:13.413Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "lutopanestorev3generalLayer-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionAwsOrgodtohnzd8cbbc1d60d4": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:10",
+        "OrganizationId": "o-dtohnzd8cb",
+        "Principal": "*"
+      }
+    },
+    "LambdaLayerPermissionPrivatebc1d60d4": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:10",
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
+      }
+    },
+    "LambdaLayerVersiond05e9fb1": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs18.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/lutopanestorev3generalLayer-LambdaLayerVersiond05e9fb1-build.zip"
+        },
+        "Description": "Updated layer version 2023-10-10T16:19:01.173Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "lutopanestorev3generalLayer-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionAwsOrgodtohnzd8cbd05e9fb1": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:9",
+        "OrganizationId": "o-dtohnzd8cb",
+        "Principal": "*"
+      }
+    },
+    "LambdaLayerPermissionPrivated05e9fb1": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:9",
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
+      }
+    },
+    "LambdaLayerVersionf0458e7d": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs18.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/lutopanestorev3generalLayer-LambdaLayerVersionf0458e7d-build.zip"
+        },
+        "Description": "Updated layer version 2023-10-10T08:38:47.581Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "lutopanestorev3generalLayer-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionAwsOrgodtohnzd8cbf0458e7d": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:8",
+        "OrganizationId": "o-dtohnzd8cb",
+        "Principal": "*"
+      }
+    },
+    "LambdaLayerPermissionPrivatef0458e7d": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:8",
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
+      }
+    },
+    "LambdaLayerVersion5de8ab5a": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs18.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/lutopanestorev3generalLayer-LambdaLayerVersion5de8ab5a-build.zip"
+        },
+        "Description": "Updated layer version 2023-10-10T02:52:07.071Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "lutopanestorev3generalLayer-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionAwsOrgodtohnzd8cb5de8ab5a": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:7",
+        "OrganizationId": "o-dtohnzd8cb",
+        "Principal": "*"
+      }
+    },
+    "LambdaLayerPermissionPrivate5de8ab5a": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:7",
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
+      }
+    },
+    "LambdaLayerVersion88e3df74": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs18.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/lutopanestorev3generalLayer-LambdaLayerVersion88e3df74-build.zip"
+        },
+        "Description": "Updated layer version 2023-10-08T07:58:04.066Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "lutopanestorev3generalLayer-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionAwsOrgodtohnzd8cb88e3df74": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:6",
+        "OrganizationId": "o-dtohnzd8cb",
+        "Principal": "*"
+      }
+    },
+    "LambdaLayerPermissionPrivate88e3df74": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:6",
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
+      }
+    },
+    "LambdaLayerVersioned57ce1b": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs18.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/lutopanestorev3generalLayer-LambdaLayerVersioned57ce1b-build.zip"
+        },
+        "Description": "Updated layer version 2023-09-24T09:32:25.859Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "lutopanestorev3generalLayer-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionAwsOrgodtohnzd8cbed57ce1b": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:5",
+        "OrganizationId": "o-dtohnzd8cb",
+        "Principal": "*"
+      }
+    },
+    "LambdaLayerPermissionPrivateed57ce1b": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:5",
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
+      }
+    },
+    "LambdaLayerVersion70e52581": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs18.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/lutopanestorev3generalLayer-LambdaLayerVersion70e52581-build.zip"
+        },
+        "Description": "Updated layer version 2023-09-24T09:08:59.267Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "lutopanestorev3generalLayer-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionAwsOrgodtohnzd8cb70e52581": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:4",
+        "OrganizationId": "o-dtohnzd8cb",
+        "Principal": "*"
+      }
+    },
+    "LambdaLayerPermissionPrivate70e52581": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:4",
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
+      }
+    },
+    "LambdaLayerVersion0ee0efe0": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs18.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/lutopanestorev3generalLayer-LambdaLayerVersion0ee0efe0-build.zip"
+        },
+        "Description": "Updated layer version 2023-09-24T08:47:34.697Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "lutopanestorev3generalLayer-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionAwsOrgodtohnzd8cb0ee0efe0": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:3",
+        "OrganizationId": "o-dtohnzd8cb",
+        "Principal": "*"
+      }
+    },
+    "LambdaLayerPermissionPrivate0ee0efe0": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:3",
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
+      }
+    },
+    "LambdaLayerVersion29afc74b": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs18.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/lutopanestorev3generalLayer-LambdaLayerVersion29afc74b-build.zip"
+        },
+        "Description": "Updated layer version 2023-09-24T08:24:05.779Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "lutopanestorev3generalLayer-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionAwsOrgodtohnzd8cb29afc74b": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:2",
+        "OrganizationId": "o-dtohnzd8cb",
+        "Principal": "*"
+      }
+    },
+    "LambdaLayerPermissionPrivate29afc74b": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:2",
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
+      }
+    },
+    "LambdaLayerVersion5e936edc": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs18.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/lutopanestorev3generalLayer-LambdaLayerVersion5e936edc-build.zip"
+        },
+        "Description": "Updated layer version 2023-09-24T07:23:08.432Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "lutopanestorev3generalLayer-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionAwsOrgodtohnzd8cb5e936edc": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:1",
+        "OrganizationId": "o-dtohnzd8cb",
+        "Principal": "*"
+      }
+    },
+    "LambdaLayerPermissionPrivate5e936edc": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:ap-southeast-1:153705271142:layer:lutopanestorev3generalLayer-dev:1",
+        "Principal": {
+          "Ref": "AWS::AccountId"
+        }
+      }
+    }
+  },
+  "Outputs": {
+    "Arn": {
+      "Value": {
+        "Ref": "LambdaLayerVersion377cd43a"
+      }
+    }
+  }
+}

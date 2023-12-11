@@ -1,0 +1,258 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+input AMPLIFY {
+  globalAuthRule: AuthRule = { allow: public }
+} # FOR TESTING ONLY!
+input AMPLIFY {
+  globalAuthRule: AuthRule = { allow: public }
+} # FOR TESTING ONLY!
+type Company @model {
+  id: ID!
+  profile: CompanyProfile!
+  stores: [Store] @hasMany(indexName: "byCompany", fields: ["id"])
+  products: [Product] @hasMany(indexName: "byCompany", fields: ["id"])
+  profileImage: Image @hasOne
+}
+
+type Store @model {
+  id: ID!
+  companyId: ID! @index(name: "byCompany", queryField: "getStoresByCompany")
+  company: Company @belongsTo(fields: ["companyId"])
+  profile: StoreProfile!
+  addressCode: String!
+  type: String! @default(value: "Front_Store") # Front_Store # Warehouse or Bodega
+  products: [Product] @hasMany(indexName: "byStore", fields: ["id"])
+  orders: [Order] @manyToMany(relationName: "StoreOrders")
+  categoryId: ID! @index(name: "byStore", queryField: "getStoresByCategory")
+  category: StoreCategory @belongsTo(fields: ["categoryId"])
+  categories: [Category] @hasMany(indexName: "byStore", fields: ["id"])
+  customers: [User] @manyToMany(relationName: "StoreCustomers")
+  tags: [Tag] @manyToMany(relationName: "StoreTags")
+  loyverseId: String
+  loyverse: AWSJSON
+}
+
+type StoreCategory @model {
+  id: ID!
+  name: String!
+  stores: [Store] @hasMany(indexName: "byStore", fields: ["id"])
+}
+
+type Category @model {
+  id: ID!
+  name: String!
+  storeId: ID! @index(name: "byStore", queryField: "getCategoriesByStore")
+  store: Store @belongsTo(fields: ["storeId"])
+  products: [Product] @hasMany(indexName: "byCategory", fields: ["id"])
+  loyverseId: String
+  loyverse: AWSJSON
+}
+
+type Tag @model {
+  id: ID!
+  label: String!
+  products: [Product] @manyToMany(relationName: "ProductTags")
+  stores: [Store] @manyToMany(relationName: "StoreTags")
+}
+
+type Product @model {
+  id: ID!
+  name: String!
+  storeId: ID! @index(name: "byStore", queryField: "getProductsByStore")
+  store: Store @belongsTo(fields: ["storeId"])
+  companyId: ID! @index(name: "byCompany", queryField: "getProductsByCompany")
+  company: Company @belongsTo(fields: ["companyId"])
+  categoryId: ID @index(name: "byCategory", queryField: "getProductsByCategory")
+  category: Category @belongsTo(fields: ["categoryId"])
+  publish: String! @default(value: "Draft")
+  images: [Image] @hasMany(indexName: "byImage", fields: ["id"])
+  addressCode: String! # City Code,
+  mainImage: Image @hasOne(fields: ["id"])
+  option1_name: String
+  option2_name: String
+  option3_name: String
+  slug: String!
+  description: String
+  tags: [Tag] @manyToMany(relationName: "ProductTags")
+  variants: [Variant] @hasMany(indexName: "byProduct", fields: ["id"])
+  loyverseId: String
+  loyverse: AWSJSON
+  # reviews: [Review] soon
+}
+
+type Variant @model {
+  id: ID!
+  productId: ID! @index(name: "byProduct", queryField: "getVariantsByProduct")
+  product: Product @belongsTo(fields: ["productId"])
+  sku: String!
+  soldByWeight: Boolean! @default(value: "false")
+  price: Float @default(value: "0.00")
+  salePrice: Float @default(value: "0.00")
+  inventory: Float @default(value: "0.00")
+  option1_value: String
+  option2_value: String
+  option3_value: String
+  description: String
+  loyverseId: String
+  loyverse: AWSJSON
+  inCartLineItems: [CartLineItem] @hasMany
+}
+
+type User @model {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  userSub: String!
+  password: String
+  number_1: String
+  number_2: String
+  address: Address
+  billingInfo: [BillingInfo]
+  loyverseId: String
+  loyverse: UserCustomer
+  orderedStores: [Store] @manyToMany(relationName: "StoreCustomers")
+  orders: [Order] @hasMany(indexName: "byUser", fields: ["id"])
+  cart: Cart @hasOne(fields: ["id"])
+}
+
+type Cart @model {
+  id: ID! @primaryKey
+  user: User @belongsTo(fields: ["id"])
+  lineItems: [CartLineItem] @hasMany(indexName: "byCart", fields: ["id"])
+}
+
+type CartLineItem @model {
+  id: ID!
+  cartId: ID! @index(name: "byCart", queryField: "getCartLineItemByCart")
+  cart: Cart @belongsTo(fields: ["cartId"])
+  variantId: ID!
+  variant: Variant @belongsTo(fields: ["variantId"])
+  quantity: Float!
+}
+
+type Order @model {
+  id: ID!
+  customerId: ID! @index(name: "byUser", queryField: "getOrdersByUser")
+  customer: User @belongsTo(fields: ["customerId"])
+  stores: [Store] @manyToMany(relationName: "StoreOrders")
+  receiptNumber: String!
+  receiptType: String! # SALE # REFUND
+  orderDate: AWSDateTime!
+  lineItems: [OrderLineItem] @hasMany(indexName: "byOrder", fields: ["id"])
+  loyverseId: String
+  loyverse: AWSJSON
+}
+
+type OrderLineItem @model {
+  id: ID!
+  orderId: ID! @index(name: "byOrder", queryField: "getOrderLineItemsByOrder")
+  order: Order @belongsTo(fields: ["orderId"])
+  productId: String!
+  variantId: String!
+  storeId: String!
+  quantity: Float!
+  price: Float!
+  salePrice: Float
+}
+
+type Image @model {
+  id: ID!
+  belongsTo: ID! @index(name: "byImage")
+  description: String
+  title: String
+  urlImage: String
+}
+
+#####################################  CUSTOM QUERIES AND MUTATIONS ######################
+
+type Mutation {
+  # USER
+  registerUser(args: RegisterUserArgs!): AWSJSON @function(name: "userFunction-${env}")
+  loginUser(args: LoginUserArgs!): AWSJSON @function(name: "userFunction-${env}")
+  verifyToken(args: UserToken!): AWSJSON @function(name: "userFunction-${env}")
+
+  # Checkout
+  checkoutCart(args: AWSJSON): AWSJSON @function(name: "checkoutFunction-${env}")
+  batchAddCartLineItems(items: [CartLineItemInput!]!): [CartLineItem]
+  batchDeleteCartLineItems(ids: [ID!]!): [AWSJSON]
+}
+
+# type Query {
+#   batchGetVariants(ids: [ID!]!): [Variant]
+# }
+
+##################################### END OF CUSTOM QUERIES AND MUTATIONS ######################
+
+input CartLineItemInput {
+  cartId: ID!
+  variantId: ID!
+  quantity: Float!
+}
+
+type StoreProfile {
+  name: String!
+  email: String
+  phone: String
+  address: Address
+}
+
+type BillingInfo {
+  id: String!
+  type: String!
+  fullName: String!
+  phone: String!
+  email: String
+  isDefault: Boolean!
+  address: Address!
+}
+
+input RegisterUserArgs {
+  password: String!
+  userData: AWSJSON!
+}
+
+input LoginUserArgs {
+  email: String!
+  password: String!
+}
+
+input UserToken {
+  token: String
+  shouldCreateNewOne: Boolean
+}
+
+type CompanyProfile {
+  name: String!
+  email: String
+  phone: String
+  address: Address
+}
+
+type UserCustomer {
+  id: String
+  customer_code: String
+  data: AWSJSON
+}
+
+type Address {
+  addressLine1: String
+  addressLine2: String
+  country: String
+  region: String
+  regionCode: String
+  state: String
+  stateCode: String
+  city: String
+  cityCode: String
+  barangay: String
+  barangayCode: String
+  landMark: String
+  zipCode: String
+  latitude: String
+  longitude: String
+  accuracy: String
+  altitudeAccuracy: String
+  speed: String
+  heading: String
+}

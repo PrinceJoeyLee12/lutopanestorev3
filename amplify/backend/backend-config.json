@@ -1,0 +1,213 @@
+{
+  "api": {
+    "lutopanestorev3": {
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDate": "2024-09-23T07:12:43.489Z",
+              "apiKeyExpirationDays": 365,
+              "description": "365"
+            },
+            "authenticationType": "API_KEY"
+          }
+        }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
+    }
+  },
+  "auth": {
+    "lutopanestorev358c29b35": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL",
+          "FAMILY_NAME",
+          "GIVEN_NAME"
+        ],
+        "socialProviders": [
+          "FACEBOOK"
+        ],
+        "usernameAttributes": [
+          "EMAIL",
+          "PHONE_NUMBER"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    }
+  },
+  "function": {
+    "checkoutFunction": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "lutopanestorev3"
+        },
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "lutopanestorev3generalLayer"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "loyverseSyncFunction": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "lutopanestorev3"
+        },
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "lutopanestorev3generalLayer"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "lutopanestorev3generalLayer": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer"
+    },
+    "userFunction": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "lutopanestorev3"
+        },
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "lutopanestorev3generalLayer"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_checkoutFunction_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "checkoutFunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_checkoutFunction_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "checkoutFunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_loyverseSyncFunction_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "loyverseSyncFunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_loyverseSyncFunction_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "loyverseSyncFunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_lutopanestorev3generalLayer_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "lutopanestorev3generalLayer"
+        }
+      ]
+    },
+    "AMPLIFY_function_lutopanestorev3generalLayer_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "lutopanestorev3generalLayer"
+        }
+      ]
+    },
+    "AMPLIFY_function_userFunction_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userFunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_userFunction_jwtExpiration": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userFunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_userFunction_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userFunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_userFunction_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "userFunction"
+        }
+      ]
+    }
+  }
+}

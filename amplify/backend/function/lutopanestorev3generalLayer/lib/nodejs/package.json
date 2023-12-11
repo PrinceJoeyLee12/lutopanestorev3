@@ -1,0 +1,22 @@
+{
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "api": "^4.5.2",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.3",
+    "moment-timezone": "^0.5.37",
+    "node-fetch": "^2.6.7",
+    "numeral": "^2.0.6",
+    "odoo-await": "^3.3.2",
+    "sharp": "^0.32.6"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.92"
+  },
+  "scripts": {
+    "install": "npm install --arch=x64 --platform=linux --target=10.15.0 sharp"
+  }
+}

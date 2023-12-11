@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "api": {
+      "lutopanestorev3": [
+        "Query",
+        "Mutation",
+        "Subscription"
+      ]
+    }
+  },
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "lutopanestorev3generalLayer",
+      "env": "dev",
+      "version": "Always choose latest version",
+      "isLatestVersionSelected": true
+    }
+  ],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "jwtExpiration",
+      "environmentVariableName": "JWT_EXPIRATION"
+    }
+  ],
+  "secretNames": [
+    "NUM_SALT_ROUND",
+    "JWT_SECRET_KEY"
+  ]
+}

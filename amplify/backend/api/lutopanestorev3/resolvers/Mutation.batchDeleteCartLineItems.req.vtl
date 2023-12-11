@@ -1,0 +1,13 @@
+#set($cartLineItemsData = [])
+#foreach($id in ${ctx.args.ids})
+    #set($map = {})
+    $util.qr($map.put("id", $util.dynamodb.toString($id)))
+    $util.qr($cartLineItemsData.add($map))
+#end
+{
+    "version" : "2018-05-29",
+    "operation" : "BatchDeleteItem",
+    "tables" : {
+        "CartLineItem-67zjjttthvdpvg4rzwfadxdg6u-dev": $util.toJson($cartLineItemsData)
+    }
+}

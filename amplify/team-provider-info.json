@@ -1,0 +1,43 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-lutopanestorev3-dev-142245-authRole",
+      "UnauthRoleArn": "arn:aws:iam::153705271142:role/amplify-lutopanestorev3-dev-142245-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::153705271142:role/amplify-lutopanestorev3-dev-142245-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-lutopanestorev3-dev-142245-deployment",
+      "UnauthRoleName": "amplify-lutopanestorev3-dev-142245-unauthRole",
+      "StackName": "amplify-lutopanestorev3-dev-142245",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:153705271142:stack/amplify-lutopanestorev3-dev-142245/c8070890-5aa2-11ee-a4db-0a0b1574b4de",
+      "AmplifyAppId": "d26g6rl71qgmkg"
+    },
+    "categories": {
+      "auth": {
+        "lutopanestorev358c29b35": {}
+      },
+      "function": {
+        "userFunction": {
+          "deploymentBucketName": "amplify-lutopanestorev3-dev-142245-deployment",
+          "s3Key": "amplify-builds/userFunction-505a4531395759366e43-build.zip",
+          "secretsPathAmplifyAppId": "d26g6rl71qgmkg",
+          "jwtExpiration": "30d"
+        },
+        "checkoutFunction": {
+          "deploymentBucketName": "amplify-lutopanestorev3-dev-142245-deployment",
+          "s3Key": "amplify-builds/checkoutFunction-684e59334c6936526f6d-build.zip"
+        },
+        "loyverseSyncFunction": {
+          "deploymentBucketName": "amplify-lutopanestorev3-dev-142245-deployment",
+          "s3Key": "amplify-builds/loyverseSyncFunction-6e677737384170537146-build.zip"
+        },
+        "lutopanestorev3generalLayer": {
+          "deploymentBucketName": "amplify-lutopanestorev3-dev-142245-deployment",
+          "s3Key": "amplify-builds/lutopanestorev3generalLayer-LambdaLayerVersion377cd43a-build.zip"
+        }
+      },
+      "api": {
+        "lutopanestorev3": {}
+      }
+    }
+  }
+}
