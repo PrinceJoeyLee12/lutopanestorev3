@@ -4,6 +4,7 @@ import {
   loginUser as loginUserMutation,
   verifyToken as verifyTokenMutation,
   updateUser as updateUserMutation,
+  createUser as createUserMutation,
 } from 'graphql/mutations';
 import {
   setLocalStorageItem,
@@ -81,26 +82,46 @@ export const registerUser = async (data) => {
       }),
     };
 
+    // const userResponse = await API.graphql({
+    //   query: registerUserMutation,
+    //   variables: { args },
+    // });
+    // console.log('@@@@@@@@@@@@@:  ~ file: actions.js:88 ~ userResponse:', userResponse);
+
+    // const createdDataResponse = userResponse?.data?.registerUser;
+    // const responseCreatedUserData = JSON.parse(createdDataResponse)?.data?.createUser;
+    // console.log('@@@@@@@@@@@@@:  ~ file: actions.js:91 ~ responseCreatedUserData:', responseCreatedUserData);
+    // const responseAttributesData = JSON.parse(createdDataResponse)?.data?.attributes;
+    // console.log('@@@@@@@@@@@@@:  ~ file: actions.js:93 ~ responseAttributesData:', responseAttributesData);
+    // const token = responseAttributesData?.token;
+    // console.log('@@@@@@@@@@@@@:  ~ file: actions.js:93 ~ token:', token);
+
+    // if (token) {
+    //   console.log('@@@@@@@@@@@@@:  ~ file: actions.js:98 ~ token:', token);
+    //   setLocalStorageItem({ [UTILS.TOKEN]: token });
+    // }
+    // if (responseCreatedUserData?.email) {
+    //   console.log('@@@@@@@@@@@@@:  ~ file: actions.js:102 ~ responseCreatedUserData:', responseCreatedUserData);
+    //   dispatch(slice.actions.getUserData(responseCreatedUserData));
+    // }
+
     const userResponse = await API.graphql({
-      query: registerUserMutation,
-      variables: { args },
+      query: createUserMutation,
+      variables: {
+        input: {
+          firstName: capitalizerOfWords(firstName),
+          lastName: capitalizerOfWords(lastName),
+          number_1: encodePHPhoneNumber(phoneNumber),
+          email,
+          userSub,
+          address: {
+            country: 'Philippines',
+          },
+        },
+      },
     });
-    console.log('@@@@@@@@@@@@@:  ~ file: actions.js:88 ~ userResponse:', userResponse);
-
-    const createdDataResponse = userResponse?.data?.registerUser;
-    const responseCreatedUserData = JSON.parse(createdDataResponse)?.data?.createUser;
-    console.log('@@@@@@@@@@@@@:  ~ file: actions.js:91 ~ responseCreatedUserData:', responseCreatedUserData);
-    const responseAttributesData = JSON.parse(createdDataResponse)?.data?.attributes;
-    console.log('@@@@@@@@@@@@@:  ~ file: actions.js:93 ~ responseAttributesData:', responseAttributesData);
-    const token = responseAttributesData?.token;
-    console.log('@@@@@@@@@@@@@:  ~ file: actions.js:93 ~ token:', token);
-
-    if (token) {
-      console.log('@@@@@@@@@@@@@:  ~ file: actions.js:98 ~ token:', token);
-      setLocalStorageItem({ [UTILS.TOKEN]: token });
-    }
-    if (responseCreatedUserData?.email) {
-      console.log('@@@@@@@@@@@@@:  ~ file: actions.js:102 ~ responseCreatedUserData:', responseCreatedUserData);
+    const responseCreatedUserData = userResponse?.data?.createUser;
+    if (responseCreatedUserData) {
       dispatch(slice.actions.getUserData(responseCreatedUserData));
     }
     return { success: true, user: responseCreatedUserData };

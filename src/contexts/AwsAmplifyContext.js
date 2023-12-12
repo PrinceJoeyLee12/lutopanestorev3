@@ -241,6 +241,7 @@ function AuthProvider({ children }) {
       },
     })
       .then(async (user) => {
+        console.log('@@@@@@@@@@@@@:  ~ file: AwsAmplifyContext.js:244 ~ user:', user);
         const { success, userData } = await registerUser({
           userSub: user?.userSub,
           firstName,
@@ -249,6 +250,7 @@ function AuthProvider({ children }) {
           phoneNumber,
           password,
         });
+        console.log('@@@@@@@@@@@@@:  ~ file: AwsAmplifyContext.js:253 ~ userData:', userData);
 
         if (!success) {
           dispatch({

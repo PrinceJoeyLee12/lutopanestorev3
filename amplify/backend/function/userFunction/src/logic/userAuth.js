@@ -42,7 +42,78 @@ exports.registerUser = async (ctx, Parameters) => {
     const options = {
       method: 'POST',
       body: JSON.stringify({
-        query: Mutations.createUser,
+        query: `
+        mutation CreateUser(
+          $input: CreateUserInput!
+          $condition: ModelUserConditionInput
+        ) {
+          createUser(input: $input, condition: $condition) {
+            id
+            firstName
+            lastName
+            email
+            userSub
+            password
+            number_1
+            number_2
+            address {
+              addressLine1
+              addressLine2
+              country
+              region
+              regionCode
+              state
+              stateCode
+              city
+              cityCode
+              barangay
+              barangayCode
+              landMark
+              zipCode
+              latitude
+              longitude
+              accuracy
+              altitudeAccuracy
+              speed
+              heading
+              __typename
+            }
+            billingInfo {
+              id
+              type
+              fullName
+              phone
+              email
+              isDefault
+              __typename
+            }
+            loyverseId
+            loyverse {
+              id
+              customer_code
+              data
+              __typename
+            }
+            orderedStores {
+              nextToken
+              __typename
+            }
+            orders {
+              nextToken
+              __typename
+            }
+            cart {
+              id
+              createdAt
+              updatedAt
+              __typename
+            }
+            createdAt
+            updatedAt
+            __typename
+          }
+        }
+      `,
         variables: {
           input: { password, ...args?.userData },
         },
@@ -58,7 +129,15 @@ exports.registerUser = async (ctx, Parameters) => {
     );
     Utils.logger('registerUser', 'Generated Token', 'INFO', newToken);
 
-    return await graphqlRequester(ctx, options, optionConfig, { token: newToken });
+    let data = '';
+    try {
+      data = await graphqlRequester(ctx, options, optionConfig, { token: newToken });
+      console.log('@@@@@@@@@@@@@:  ~ file: userAuth.js:62 ~ data:', JSON.stringify(data));
+    } catch (error) {
+      console.log('@@@@@@@@@@@@@:  ~ file: userAuth.js:66 ~ error:', JSON.stringify(error));
+    }
+
+    return data;
   } catch (error) {
     Utils.logger('registerUser', '', 'ERROR', error);
     return errorResponder(400, ctx?.fieldName, 'Cannot store user password!', null);
